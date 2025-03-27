@@ -37,14 +37,8 @@ class _LoanFormState extends State<LoanForm> {
       setState(() {
         int tempAmount = int.parse(result['loanAmount'].toString());
         int tempPeriod = int.parse(result['loanPeriod'].toString());
-
-        if (tempAmount <= _loanAmount || tempPeriod > _loanPeriod) {
-          _loanAmountResult = int.parse(result['loanAmount'].toString());
-          _loanPeriodResult = int.parse(result['loanPeriod'].toString());
-        } else {
-          _loanAmountResult = _loanAmount;
-          _loanPeriodResult = _loanPeriod;
-        }
+        _loanAmountResult = tempAmount;
+        _loanPeriodResult = tempPeriod;
         _errorMessage = result['errorMessage'].toString();
       });
     } else {
@@ -80,7 +74,6 @@ class _LoanFormState extends State<LoanForm> {
                             onChanged: (value) {
                               setState(() {
                                 _nationalId = value ?? '';
-                                _submitForm();
                               });
                             },
                           ),
@@ -101,13 +94,12 @@ class _LoanFormState extends State<LoanForm> {
                     onChanged: (double newValue) {
                       setState(() {
                         _loanAmount = ((newValue.floor() / 100).round() * 100);
-                        _submitForm();
                       });
                     },
                   ),
                   const SizedBox(height: 4),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 12),
@@ -140,13 +132,12 @@ class _LoanFormState extends State<LoanForm> {
                     onChanged: (double newValue) {
                       setState(() {
                         _loanPeriod = ((newValue.floor() / 6).round() * 6);
-                        _submitForm();
                       });
                     },
                   ),
                   const SizedBox(height: 4),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 12),
@@ -181,7 +172,13 @@ class _LoanFormState extends State<LoanForm> {
                   'Approved Loan Period: ${_loanPeriodResult != 0 ? _loanPeriodResult : "--"} months'),
               Visibility(
                   visible: _errorMessage != '',
-                  child: Text(_errorMessage, style: errorMedium))
+                  child: Text(_errorMessage, style: errorMedium)),
+              TextButton(
+                  onPressed: _submitForm,
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.secondaryColor,
+                  ),
+                  child: const Text('Calculate'))
             ],
           ),
         ],
