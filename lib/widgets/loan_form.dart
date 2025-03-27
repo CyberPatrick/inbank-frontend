@@ -125,7 +125,7 @@ class _LoanFormState extends State<LoanForm> {
                   Slider.adaptive(
                     value: _loanPeriod.toDouble(),
                     min: 12,
-                    max: 60,
+                    max: 48,
                     divisions: 40,
                     label: '$_loanPeriod months',
                     activeColor: AppColors.secondaryColor,
