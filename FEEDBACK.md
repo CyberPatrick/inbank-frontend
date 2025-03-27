@@ -59,5 +59,5 @@ ___
 There is a **performance issue.**
 Currently, every time the slider is moved, the client makes a request to the server, resulting in too many unnecessary requests. It would be better to add a button that, when pressed, sends a request to the server for the credit response. Additionally, caching the results can be implemented to prevent repeated requests with the same input data.
 ## The most important shortcoming of TICKET-101
-The backend does not use the formula for credit score, and the frontend is missing the button for the request as well as the display for the maximum loan amount.  
+The frontend is missing the button for the request as well as the display for the maximum loan amount. Also, change maximum load period to 48 and put it to application.properties.
 **Fixed.**
